@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITALIA — 9–24 Maggio 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --cream: #f7f3ed;
+    --charcoal: #262322;
+    --ochre: #d1ad6b;
+    --terracotta: #c2704f;
+    --sienna: #a66048;
+    --slate: #617a94;
+    --seafoam: #8cb8ac;
+    --alpine: #f0efeb;
+    --muted: #8a847c;
+    --light-line: #ddd6c8;
+    --roma-bg: rgba(194,112,79,0.06);
+    --firenze-bg: rgba(140,184,172,0.06);
+    --venezia-bg: rgba(97,122,148,0.06);
+    --milano-bg: rgba(138,132,124,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--ochre);
+    color: white;
+  }
+
+  /* ── LOADER ── */
+  #loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  #loader .loader-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; color: var(--cream);
+    letter-spacing: 0.3em; opacity: 0;
+    animation: fadeInLoader 1s ease 0.3s forwards;
+  }
+  @keyframes fadeInLoader {
+    to { opacity: 1; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 3rem; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(247,243,237,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--light-line);
+    transition: transform 0.3s ease;
+  }
+  nav.nav-hidden { transform: translateY(-100%); }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em;
+    color: var(--charcoal);
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    text-decoration: none; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--ochre);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--charcoal); }
+  .nav-links a.active::after { width: 100%; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-canvas { position: absolute; inset: 0; z-index: 0; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 9rem); font-weight: 300;
+    letter-spacing: 0.08em; line-height: 0.95;
+    color: var(--charcoal); margin-bottom: 1.2rem;
+    opacity: 0; transform: translateY(30px);
+    animation: heroIn 1.2s ease 1.5s forwards;
+  }
+  .hero-sub {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.2em; color: var(--muted);
+    opacity: 0; animation: heroIn 1s ease 2s forwards;
+  }
+  .hero-dates {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300; font-style: italic;
+    color: var(--ochre); margin-top: 1.5rem;
+    opacity: 0; animation: heroIn 1s ease 2.3s forwards;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 50%;
+    transform: translateX(-50%); z-index: 1;
+    opacity: 0; animation: heroIn 1s ease 2.8s forwards;
+  }
+  .hero-scroll span {
+    display: block; width: 1px; height: 40px;
+    background: var(--ochre); margin: 0 auto;
+    animation: scrollPulse 2s ease infinite;
+  }
+  @keyframes heroIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 5rem 3rem; max-width: 1200px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300;
+    letter-spacing: 0.04em; margin-bottom: 0.5rem;
+  }
+  .section-line {
+    width: 60px; height: 1px; background: var(--ochre);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── OVERVIEW STATS ── */
+  #overview { padding-top: 2rem; }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem; margin-bottom: 3rem;
+  }
+  .stat-card {
+    padding: 1.8rem 1.5rem; border: 1px solid var(--light-line);
+    border-radius: 2px; text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+    opacity: 0; transform: translateY(20px);
+  }
+  .stat-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .stat-card:hover { border-color: var(--ochre); transform: translateY(-2px); }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--ochre);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; color: var(--muted);
+    text-transform: uppercase; margin-top: 0.5rem;
+  }
+
+  /* ── ROUTE MAP (interactive) ── */
+  .route-container {
+    width: 100%; aspect-ratio: 16/9; position: relative;
+    margin: 2rem 0 3rem; border: 1px solid var(--light-line);
+    border-radius: 2px; overflow: hidden; background: var(--cream);
+  }
+  .route-canvas { width: 100%; height: 100%; }
+
+  /* ── TIMELINE ── */
+  #timeline { padding-bottom: 3rem; }
+  .timeline-bar {
+    display: flex; justify-content: space-between; padding: 1rem 0;
+    border-top: 1px solid var(--light-line);
+    border-bottom: 1px solid var(--light-line);
+    margin-bottom: 2rem; overflow-x: auto; gap: 0;
+  }
+  .tl-day {
+    flex: 1; min-width: 50px; text-align: center; padding: 0.8rem 0.2rem;
+    cursor: pointer; border-radius: 2px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .tl-day:hover { background: rgba(209,173,107,0.08); }
+  .tl-day.active { background: rgba(209,173,107,0.15); }
+  .tl-day .tl-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400;
+  }
+  .tl-day .tl-dow {
+    font-family: 'DM Mono', monospace; font-size: 0.5rem;
+    color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .tl-day .tl-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    margin: 4px auto 0; opacity: 0.6;
+  }
+
+  /* ── DAY DETAIL PANEL ── */
+  .day-detail {
+    background: white; border: 1px solid var(--light-line);
+    border-radius: 2px; padding: 2.5rem 3rem;
+    margin-bottom: 2rem;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .day-detail.visible { opacity: 1; transform: translateY(0); }
+  .day-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--ochre);
+    line-height: 1;
+  }
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400;
+  }
+  .day-city-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; padding: 0.25rem 0.8rem;
+    border-radius: 1px; text-transform: uppercase;
+  }
+  .day-periods { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+  .period {
+    padding-left: 1rem;
+    border-left: 2px solid var(--light-line);
+  }
+  .period-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .period-item {
+    font-size: 0.85rem; line-height: 1.7;
+    color: var(--charcoal);
+  }
+  .period-item .time {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--ochre); margin-right: 0.3rem;
+  }
+  .period-item .highlight {
+    font-weight: 500;
+  }
+  .period-item .note {
+    font-size: 0.75rem; color: var(--muted); font-style: italic;
+  }
+  .day-tip {
+    margin-top: 1.5rem; padding: 1rem 1.2rem;
+    background: rgba(209,173,107,0.06);
+    border-left: 2px solid var(--ochre);
+    font-size: 0.8rem; color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── CITIES SECTION ── */
+  .city-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .city-card {
+    padding: 2rem; border: 1px solid var(--light-line);
+    border-radius: 2px; cursor: pointer;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+  }
+  .city-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .city-card:hover { border-color: var(--ochre); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+  .city-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; opacity: 0.6;
+  }
+  .city-card[data-city="roma"]::before { background: var(--terracotta); }
+  .city-card[data-city="firenze"]::before { background: var(--seafoam); }
+  .city-card[data-city="venezia"]::before { background: var(--slate); }
+  .city-card[data-city="milano"]::before { background: var(--muted); }
+  .city-card .city-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem;
+  }
+  .city-card .city-meta {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1rem;
+  }
+  .city-card .city-landmarks {
+    list-style: none; font-size: 0.8rem; line-height: 2;
+  }
+  .city-card .city-landmarks li::before {
+    content: '·'; margin-right: 0.5rem; color: var(--ochre);
+  }
+
+  /* ── TICKETS ── */
+  #tickets { background: white; max-width: 100%; padding: 5rem 3rem; }
+  #tickets > div { max-width: 1200px; margin: 0 auto; }
+  .tickets-table {
+    width: 100%; border-collapse: collapse; margin-top: 1.5rem;
+  }
+  .tickets-table th {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); text-align: left;
+    padding: 0.8rem 1rem; border-bottom: 1px solid var(--light-line);
+  }
+  .tickets-table td {
+    padding: 0.8rem 1rem; font-size: 0.85rem;
+    border-bottom: 1px solid rgba(221,214,200,0.5);
+    vertical-align: top;
+  }
+  .tickets-table tr:hover td { background: rgba(209,173,107,0.04); }
+  .urgency-red { color: #c44; font-weight: 500; }
+  .urgency-yellow { color: #b89030; }
+  .urgency-green { color: #5a8a5e; }
+  .ticket-purchased {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: #5a8a5e; background: rgba(90,138,94,0.08);
+    padding: 0.15rem 0.5rem; border-radius: 1px;
+  }
+  .ticket-link {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--slate); text-decoration: none;
+    border-bottom: 1px dotted var(--slate);
+    transition: color 0.3s;
+  }
+  .ticket-link:hover { color: var(--terracotta); }
+
+  /* ── TIPS ── */
+  .tips-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .tip-card {
+    padding: 1.5rem; border-left: 2px solid var(--light-line);
+    transition: border-color 0.3s;
+  }
+  .tip-card:hover { border-color: var(--ochre); }
+  .tip-icon {
+    font-size: 1.3rem; margin-bottom: 0.5rem;
+  }
+  .tip-title {
+    font-family: 'Inter', sans-serif; font-size: 0.85rem;
+    font-weight: 500; margin-bottom: 0.4rem;
+  }
+  .tip-text {
+    font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ── ACTIONS BANNER ── */
+  .actions-banner {
+    background: var(--charcoal); color: var(--cream);
+    padding: 4rem 3rem; text-align: center;
+  }
+  .actions-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+  .action-items {
+    display: flex; flex-direction: column; gap: 0.8rem;
+    max-width: 700px; margin: 0 auto; text-align: left;
+  }
+  .action-item {
+    display: flex; gap: 1rem; align-items: baseline;
+    padding: 0.8rem 1rem; border: 1px solid rgba(247,243,237,0.1);
+    border-radius: 2px; transition: border-color 0.3s;
+  }
+  .action-item:hover { border-color: var(--ochre); }
+  .action-date {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--ochre); white-space: nowrap; min-width: 100px;
+  }
+  .action-text { font-size: 0.85rem; line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem;
+    border-top: 1px solid var(--light-line);
+  }
+  footer p {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 0.15em;
+  }
+  footer .footer-heart {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; font-style: italic;
+    color: var(--ochre); margin-bottom: 0.5rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.55rem; }
+    section { padding: 3rem 1.5rem; }
+    .day-detail { padding: 1.5rem; }
+    .tl-day { min-width: 40px; }
+    .tl-day .tl-num { font-size: 1rem; }
+    #tickets { padding: 3rem 1.5rem; }
+    .tickets-table { font-size: 0.75rem; display: block; overflow-x: auto; }
+    .actions-banner { padding: 3rem 1.5rem; }
+  }
+
+  /* ── FADE IN UTILITY ── */
+  .fade-section {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-section.visible {
+    opacity: 1; transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text">ITALIA</div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">ITALIA 2026</div>
+  <div class="nav-links">
+    <a href="#overview">Обзор</a>
+    <a href="#timeline">Дни</a>
+    <a href="#cities">Города</a>
+    <a href="#tickets">Билеты</a>
+    <a href="#tips">Советы</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <h1>ITALIA</h1>
+    <div class="hero-sub">CARTOGRAPHIC REVERIE · PRIMA VOLTA</div>
+    <div class="hero-dates">9 Maggio — 24 Maggio 2026</div>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</header>
+
+<!-- OVERVIEW -->
+<section id="overview" class="fade-section">
+  <div class="section-label">Specimen Nº 001</div>
+  <div class="section-title">Обзор маршрута</div>
+  <div class="section-line"></div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-number" data-count="16">0</div><div class="stat-label">Дней</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="15">0</div><div class="stat-label">Ночей</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="5">0</div><div class="stat-label">Городов</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="4">0</div><div class="stat-label">Поезда</div></div>
+    <div class="stat-card"><div class="stat-number" data-count="10">0</div><div class="stat-label">Полных дней</div></div>
+  </div>
+  <div class="route-container">
+    <canvas class="route-canvas" id="routeCanvas"></canvas>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="fade-section">
+  <div class="section-label">День за днём</div>
+  <div class="section-title">Хронология</div>
+  <div class="section-line"></div>
+  <div class="timeline-bar" id="timelineBar"></div>
+  <div id="dayDetailContainer"></div>
+</section>
+
+<!-- CITIES -->
+<section id="cities" class="fade-section">
+  <div class="section-label">Пять остановок</div>
+  <div class="section-title">Города</div>
+  <div class="section-line"></div>
+  <div class="city-cards" id="cityCards"></div>
+</section>
+
+<!-- TICKETS -->
+<section id="tickets">
+  <div class="fade-section">
+    <div class="section-label">Prenotazioni</div>
+    <div class="section-title">Билеты и бронирования</div>
+    <div class="section-line"></div>
+    <div id="ticketsContent"></div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" class="fade-section">
+  <div class="section-label">Consigli pratici</div>
+  <div class="section-title">Практические советы</div>
+  <div class="section-line"></div>
+  <div class="tips-grid" id="tipsGrid"></div>
+</section>
+
+<!-- ACTIONS BANNER -->
+<div class="actions-banner fade-section">
+  <h2>Критические действия</h2>
+  <div class="action-items" id="actionItems"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-heart">Buon Viaggio</div>
+  <p>CARTOGRAPHIC REVERIE · ITALIA MAGGIO 2026</p>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════════
+
+const CITIES = {
+  roma: { name: 'Roma', color: '#c2704f', dates: '9–12 + 21–24 мая', nights: 6, label: 'La Città Eterna' },
+  firenze: { name: 'Firenze', color: '#8cb8ac', dates: '12–15 мая', nights: 3, label: 'Culla del Rinascimento' },
+  venezia: { name: 'Venezia', color: '#617a94', dates: '15–18 мая', nights: 3, label: 'La Serenissima' },
+  milano: { name: 'Milano', color: '#8a847c', dates: '18–21 мая', nights: 3, label: 'Capitale del Design' },
+};
+
+const DAYS = [
+  {
+    num: 1, date: '9 мая', dow: 'ПТ', city: 'roma', title: 'Прилёт в Рим',
+    periods: [
+      { label: 'День', items: [
+        { time: '15:00', text: 'Приземление. Leonardo Express → Roma Termini (32 мин)', highlight: true },
+        { time: '~16:30', text: 'Заселение в отель (Via Firenze, 48 — 5 мин от Termini)' },
+        { text: 'Отдых, душ, распаковка' },
+      ]},
+      { label: 'Вечер', items: [
+        { time: '18:00', text: 'Фонтана Треви — вечерняя подсветка, меньше людей', highlight: true },
+        { text: 'Piazza di Spagna (Испанская лестница) — 7 мин от Треви' },
+        { text: 'Ужин в районе Via del Corso' },
+      ]},
+    ],
+    tip: 'Вечер первого дня — не нагружайте себя. Просто впитывайте атмосферу.',
+  },
+  {
+    num: 2, date: '10 мая', dow: 'СБ', city: 'roma', title: 'Рим: Античность',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '08:30', text: 'Колизей (первый слот — минимум людей)', highlight: true, note: 'Билет покупать заранее! Продажа за 30 дней — с 10 апреля' },
+        { time: '~10:30', text: 'Римский Форум — музей под открытым небом (1.5 ч)' },
+        { time: '~12:00', text: 'Палатинский холм — виды на Форум и Большой Цирк' },
+      ]},
+      { label: 'День', items: [
+        { time: '13:00', text: 'Обед в районе Monti (Via dei Serpenti)' },
+        { time: '14:30', text: 'Piazza Venezia — Витториано (вход на крышу бесплатный)' },
+        { time: '16:30', text: 'Район Пантеона: Piazza della Rotonda, кофе' },
+        { time: '17:30', text: 'Piazza Navona — Фонтан Четырёх рек Бернини', highlight: true },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Прогулка в Трастевере — самый атмосферный район', highlight: true },
+        { text: 'Aperitivo на Piazza di Santa Maria in Trastevere' },
+        { text: 'Ужин: Da Enzo al 29, Tonnarello' },
+      ]},
+    ],
+  },
+  {
+    num: 3, date: '11 мая', dow: 'ВС', city: 'roma', title: 'Рим: Ватикан',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '10:00', text: 'Базилика Святого Петра (бесплатно)', highlight: true },
+        { text: 'Подъём на купол — €8, 551 ступенька, один из лучших видов Рима' },
+        { time: '12:00', text: 'Площадь Св. Петра, колоннада Бернини' },
+      ]},
+      { label: 'День', items: [
+        { time: '13:30', text: 'Ватиканские Музеи (купленный билет!)', highlight: true, note: 'Маршрут: Египетский музей → Галерея карт → Станцы Рафаэля → Сикстинская Капелла. 3–3.5 часа' },
+        { time: '~17:00', text: 'Замок Святого Ангела снаружи (билет на 23 мая)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Мост Святого Ангела (Ponte Sant\'Angelo)' },
+        { text: 'Ужин в районе Prati — менее туристический', highlight: true },
+        { text: '⚠️ Собрать вещи! Завтра поезд в 09:25' },
+      ]},
+    ],
+    tip: 'В воскресенье возможна папская месса — проверьте расписание.',
+  },
+  {
+    num: 4, date: '12 мая', dow: 'ПН', city: 'firenze', title: 'Переезд → Флоренция',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '08:50', text: 'Roma Termini (5 мин от отеля)' },
+        { time: '09:25', text: 'Поезд Рим → Флоренция (куплен!) → прибытие 11:01', highlight: true },
+      ]},
+      { label: 'День', items: [
+        { time: '11:30', text: 'Собор Дуомо — осмотр фасада, Кампанила Джотто (414 ступенек)', highlight: true },
+        { time: '13:00', text: 'Обед у Mercato Centrale — фуд-корт высшего качества' },
+        { time: '15:00', text: 'Ponte Vecchio — прогулка по набережной Арно' },
+        { time: '17:00', text: 'Подъём к Piazzale Michelangelo (~20 мин пешком)' },
+      ]},
+      { label: 'Вечер', items: [
+        { time: '18:00', text: 'Piazzale Michelangelo — закат над Флоренцией. MUST-SEE!', highlight: true },
+        { text: 'Ужин в Олтрарно или Санто Спирито' },
+      ]},
+    ],
+    tip: 'Понедельник — Уффици и Академия ЗАКРЫТЫ! План адаптирован.',
+  },
+  {
+    num: 5, date: '13 мая', dow: 'ВТ', city: 'firenze', title: 'Флоренция: Музеи',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '08:15', text: 'Галерея Уффици (3–3.5 часа)', highlight: true, note: 'Боттичелли, Леонардо, Микеланджело, Караваджо, Рафаэль. Билет €25, бронировать за 1–2 мес!' },
+      ]},
+      { label: 'День', items: [
+        { time: '14:30', text: 'Галерея Академии — «Давид» Микеланджело (~1.5 ч)', highlight: true, note: 'Раскупается быстрее Уффици!' },
+        { time: '16:00', text: 'Via Tornabuoni (шоппинг), Piazza della Signoria' },
+        { time: '17:00', text: 'Базилика Санта Кроче — могилы Микеланджело, Галилея, Макиавелли (€8)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Aperitivo на Piazza Santo Spirito или Golden View Open Bar' },
+        { text: 'Bistecca alla fiorentina — главное гастрономическое впечатление!', highlight: true },
+        { text: 'Ponte Vecchio подсвечен вечером' },
+      ]},
+    ],
+  },
+  {
+    num: 6, date: '14 мая', dow: 'СР', city: 'firenze', title: 'Флоренция: Свободный день',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '09:00', text: 'Подъём на купол Брунеллески — 463 ступеньки, фрески Вазари', highlight: true, note: 'Бронируйте слот заранее!' },
+        { time: '11:00', text: 'Музей Опера дель Дуомо — Врата Рая Гиберти' },
+      ]},
+      { label: 'День', items: [
+        { time: '14:30', text: 'Palazzo Pitti + Сады Боболи (3 ч)', highlight: true, note: 'Палатинская галерея: Рафаэль, Тициан. Ренессансные сады' },
+        { text: 'ИЛИ: рынок Сан-Лоренцо, кожаные мастерские, gelato-тур' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Последний вечер — район Сан-Фредиано (Олтрарно)' },
+        { text: 'Aperitivo в Volume Firenze' },
+        { text: '⚠️ Собрать вещи — завтра Венеция' },
+      ]},
+    ],
+  },
+  {
+    num: 7, date: '15 мая', dow: 'ЧТ', city: 'venezia', title: 'Переезд → Венеция',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '~09:00', text: 'Поезд Firenze SMN → Venezia Santa Lucia (~2 ч)', highlight: true },
+        { time: '~11:00', text: 'Прибытие в Венецию! Гранд-канал сразу от вокзала' },
+      ]},
+      { label: 'День', items: [
+        { time: '12:00', text: 'Прогулка по Канареджо — «настоящий» район, мало туристов' },
+        { time: '13:00', text: 'Обед: Osteria L\'Orto dei Mori, cichetti в Alla Vedova' },
+        { time: '15:00', text: 'Мост Риальто — фото, район рынка', highlight: true },
+        { time: '16:00', text: 'К Площади Сан-Марко через переулки — заблудитесь!' },
+      ]},
+      { label: 'Вечер', items: [
+        { time: '18:00', text: 'Кампанила Сан-Марко — закат над лагуной (€10)', highlight: true },
+        { text: 'Cicchetti + Spritz у Риальто (Al Mercà, Cantina Do Spade)' },
+        { text: 'Вечерняя Венеция — город преображается' },
+      ]},
+    ],
+    tip: 'Венеция: возможна плата за вход €5 — проверьте cda.ve.it заранее!',
+  },
+  {
+    num: 8, date: '16 мая', dow: 'ПТ', city: 'venezia', title: 'Бурано + Мурано',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '08:30', text: 'Вапоретто линия 12 → Мурано (45 мин)', highlight: true },
+        { text: 'Музей стекла Мурано (€10) + демонстрация выдувания (бесплатно)' },
+        { text: 'Церковь Санти Мария и Донато — мозаичный пол XII века' },
+      ]},
+      { label: 'День', items: [
+        { time: '12:00', text: 'Бурано — самый фотогеничный остров в мире!', highlight: true },
+        { time: '12:30', text: 'Обед: risotto al nero di seppia (Trattoria al Gatto Nero)' },
+        { text: 'Museo del Merletto (музей кружева), gelato у канала' },
+        { time: '16:00', text: 'Вапоретто обратно в Венецию (~45 мин)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Dorsoduro → Ponte dell\'Accademia (закатный вид)', highlight: true },
+        { text: 'Santa Maria della Salute — барочная церковь (бесплатно)' },
+        { text: 'Ужин в Дорсодуро: Estro Vino e Cucina' },
+      ]},
+    ],
+  },
+  {
+    num: 9, date: '17 мая', dow: 'СБ', city: 'venezia', title: 'Венеция: Основное',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '08:30', text: 'Дворец Дожей (бронировать заранее!) + Мост Вздохов', highlight: true, note: 'Комбинированный билет с музеями площади Сан-Марко' },
+        { time: '11:00', text: 'Собор Сан-Марко (бесплатно, Pala d\'Oro €5)', highlight: true },
+      ]},
+      { label: 'День', items: [
+        { time: '13:00', text: 'Cicchetti-тур по барам у Риальто' },
+        { time: '14:30', text: 'Гондола (~€80 за лодку, до 6 чел., 30–40 мин)', highlight: true },
+        { text: 'ИЛИ: Peggy Guggenheim Collection (€16, 1.5 ч)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Набережная Zattere — вид на Джудекку' },
+        { text: 'Прощальный ужин: Osteria alle Testiere' },
+        { text: '⚠️ Собрать вещи — завтра Милан' },
+      ]},
+    ],
+  },
+  {
+    num: 10, date: '18 мая', dow: 'ВС', city: 'milano', title: 'Переезд → Милан',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '~09:30', text: 'Поезд Venezia → Milano Centrale (~2ч 15м)', highlight: true },
+        { time: '~11:45', text: 'Прибытие. Сам вокзал — достопримечательность (архитектура 1930-х)' },
+      ]},
+      { label: 'День', items: [
+        { time: '13:00', text: 'Luini panzerotti — миланская институция!' },
+        { time: '14:00', text: 'Galleria Vittorio Emanuele II — стеклянные своды, мозаики', highlight: true },
+        { time: '14:30', text: 'Миланский Дуомо — фасад поражает (внутрь бесплатно)' },
+        { time: '16:00', text: 'Terrazza del Duomo — 135 шпилей, вид на Альпы! (€16)', highlight: true },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Район Navigli — лучшее место для aperitivo в Милане!', highlight: true },
+        { text: 'Ужин на Navigli: Premiata Pizzeria, El Brellin' },
+      ]},
+    ],
+  },
+  {
+    num: 11, date: '19 мая', dow: 'ПН', city: 'milano', title: 'Милан: Культура',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '09:00', text: 'Замок Сфорца — «Пьета Ронданини» Микеланджело', highlight: true },
+        { time: '11:00', text: 'Парк Семпионе, Арка Мира' },
+        { time: '12:00', text: 'Пинакотека Брера — Рафаэль, Караваджо, Мантенья (€15)', highlight: true },
+      ]},
+      { label: 'День', items: [
+        { time: '14:30', text: 'Район Брера — улочки, галереи, антиквариат' },
+        { time: '16:00', text: 'Церковь Сан-Маурицио — «Миланская Сикстина» (бесплатно!)', highlight: true },
+        { time: '17:00', text: 'Via Montenapoleone — район моды' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Aperitivo в районе Isola или Porta Garibaldi' },
+        { text: 'Risotto alla Milanese — обязательно!', highlight: true },
+      ]},
+    ],
+    tip: 'Понедельник: Тайная вечеря закрыта — планируем на вторник.',
+  },
+  {
+    num: 12, date: '20 мая', dow: 'ВТ', city: 'milano', title: 'Тайная вечеря',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '~09:00', text: 'Прибыть в Santa Maria delle Grazie за 30 мин до слота', note: 'Билеты в продаже с 24 марта 2026 в 12:00 на lastsupper.shop!' },
+        { time: '~09:30', text: '«Тайная вечеря» Леонардо да Винчи (строго 15 минут!)', highlight: true },
+        { time: '10:00', text: 'Церковь Santa Maria delle Grazie (Браманте, UNESCO)' },
+      ]},
+      { label: 'День', items: [
+        { time: '14:30', text: 'Fondazione Prada (€15) ИЛИ Cimitero Monumentale (бесплатно)', highlight: true },
+        { time: '17:00', text: 'Marchesi 1824 — историческая кондитерская Prada' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Terrazza Aperol (вид на Дуомо) или Ceresio 7', highlight: true },
+        { text: 'Прощальный ужин в Милане' },
+        { text: '⚠️ Собрать вещи — завтра РАННИЙ поезд!' },
+      ]},
+    ],
+  },
+  {
+    num: 13, date: '21 мая', dow: 'СР', city: 'roma', title: 'Милан → Рим + Боргезе',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '06:30', text: 'Подъём' },
+        { time: '~08:00', text: 'Поезд Milano → Roma Termini (~2ч 55м)', highlight: true },
+        { time: '~10:55', text: 'Прибытие. Багаж в камеру хранения (€6–8)' },
+        { time: '11:45', text: 'Метро/автобус до Villa Borghese. Быть у входа к 12:45!' },
+      ]},
+      { label: 'День', items: [
+        { time: '13:00', text: 'Галерея Боргезе (2 часа, купленный билет!)', highlight: true, note: 'Бернини, Караваджо, Канова, Тициан, Рафаэль. Одна из лучших коллекций в мире' },
+        { time: '16:00', text: 'Piazza del Popolo, Via del Corso' },
+        { time: '17:00', text: 'Check-in (Via Principe Amedeo, 82)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Район Монти — Ai Tre Scalini, Barnum Café', highlight: true },
+        { text: 'Ужин: La Carbonara, Alle Carrette (пицца)' },
+      ]},
+    ],
+    tip: 'Критически напряжённый день! Поезд ~3 часа + Боргезе в 13:00.',
+  },
+  {
+    num: 14, date: '22 мая', dow: 'ЧТ', city: 'roma', title: 'Рим: Глубже',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '09:00', text: 'Трастевере утром — Базилика Санта-Мария-ин-Трастевере' },
+        { time: '11:00', text: 'Авентинский холм: замочная скважина Мальтийского ордена!', highlight: true },
+        { text: 'Апельсиновый сад — один из лучших видов на Рим', highlight: true },
+      ]},
+      { label: 'День', items: [
+        { time: '13:00', text: 'Обед в Тестаччо: cacio e pepe в Flavio al Velavevodetto', highlight: true },
+        { text: 'Рынок Тестаччо — местные деликатесы' },
+        { time: '17:00', text: 'Фонтан Треви (повторный визит — днём другое впечатление)' },
+      ]},
+      { label: 'Вечер', items: [
+        { text: 'Еврейское гетто — артишоки алла джудиа в Nonna Betta!', highlight: true },
+        { text: 'Teatro Marcello (подсвечен) → Колизей ночью' },
+      ]},
+    ],
+  },
+  {
+    num: 15, date: '23 мая', dow: 'ПТ', city: 'roma', title: 'Рим: Финальные точки',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '09:00', text: 'Испанская лестница утром (мало людей)' },
+        { time: '09:30', text: 'Via Condotti — самая фешенебельная улица Рима' },
+        { time: '11:30', text: 'Piazza Barberini → Fontana del Tritone (Бернини)' },
+        { time: '12:00', text: 'Базилика Санта-Мария-Маджоре (5 мин от отеля, бесплатно)', highlight: true },
+      ]},
+      { label: 'День', items: [
+        { text: 'Свободное время / сувениры' },
+        { time: '17:00', text: 'Castel Sant\'Angelo (купленный билет!)', highlight: true, note: 'Мавзолей Адриана → папская крепость → музей. Терраса — вид на Ватикан' },
+      ]},
+      { label: 'Вечер', items: [
+        { time: '18:30', text: 'Ponte Sant\'Angelo в золотом свете заката', highlight: true },
+        { text: 'Последний вечер в Италии! Прати или Трастевере' },
+      ]},
+    ],
+  },
+  {
+    num: 16, date: '24 мая', dow: 'СБ', city: 'roma', title: 'Последний день + вылет',
+    periods: [
+      { label: 'Утро', items: [
+        { time: '07:00', text: 'Check-out' },
+        { time: '09:00', text: 'Пантеон (купленный билет!) — 2000 лет, окулус в куполе', highlight: true },
+        { time: '09:45', text: 'Кофе на площади перед Пантеоном — идеальное завершение' },
+        { time: '10:30', text: 'Последние покупки / любимые места' },
+      ]},
+      { label: 'День', items: [
+        { time: '15:00–17:00', text: 'Последняя прогулка или отдых в кафе' },
+        { time: '17:30', text: 'Leonardo Express → Fiumicino' },
+        { time: '18:00', text: 'В аэропорту (за 2.5 часа до вылета)' },
+        { time: '21:10', text: 'Вылет ✈️', highlight: true },
+      ]},
+    ],
+    tip: 'Arrivederci, Italia! 🇮🇹',
+  },
+];
+
+const CITY_LANDMARKS = {
+  roma: [
+    'Колизей + Форум + Палатин', 'Ватиканские Музеи + Сикстинская Капелла',
+    'Базилика Св. Петра + купол', 'Пантеон', 'Галерея Боргезе',
+    'Castel Sant\'Angelo', 'Фонтана Треви', 'Piazza Navona',
+    'Трастевере', 'Авентинский холм', 'Тестаччо', 'Испанская лестница',
+  ],
+  firenze: [
+    'Галерея Уффици', 'Галерея Академии (Давид)', 'Дуомо + Купол Брунеллески',
+    'Ponte Vecchio', 'Palazzo Pitti + Сады Боболи', 'Piazzale Michelangelo',
+    'Базилика Санта Кроче', 'Mercato Centrale', 'Музей Опера дель Дуомо',
+  ],
+  venezia: [
+    'Дворец Дожей + Мост Вздохов', 'Базилика Сан-Марко', 'Кампанила Сан-Марко',
+    'Бурано (целый день!)', 'Мурано + Музей стекла', 'Мост Риальто',
+    'Гондола', 'Ponte dell\'Accademia', 'Santa Maria della Salute',
+  ],
+  milano: [
+    'Тайная вечеря Леонардо', 'Дуомо + Террасса (135 шпилей)',
+    'Замок Сфорца (Пьета Ронданини)', 'Пинакотека Брера',
+    'Galleria Vittorio Emanuele II', 'Церковь Сан-Маурицио',
+    'Navigli (каналы)', 'Fondazione Prada',
+  ],
+};
+
+const TICKETS = [
+  { name: 'Тайная вечеря', city: 'Милан', date: '20 мая', site: 'lastsupper.shop', urgency: 'red', note: 'Продажа 24 МАР 12:00!' },
+  { name: 'Колизей + Форум + Палатин', city: 'Рим', date: '10 мая', site: 'ticketing.colosseo.it', urgency: 'red', note: 'Продажа с 10 апреля' },
+  { name: 'Галерея Уффици', city: 'Флоренция', date: '13 мая', site: 'tickets.uffizi.it', urgency: 'red', note: 'За 1–2 месяца' },
+  { name: 'Галерея Академии (Давид)', city: 'Флоренция', date: '13 мая', site: 'b-ticket.com', urgency: 'red', note: 'Раскупается первой!' },
+  { name: 'Дворец Дожей', city: 'Венеция', date: '17 мая', site: 'palazzoducale.visitmuve.it', urgency: 'yellow', note: 'За 2–4 недели' },
+  { name: 'Купол Брунеллески', city: 'Флоренция', date: '14 мая', site: 'duomo.firenze.it', urgency: 'yellow', note: 'Time-slot' },
+  { name: 'Palazzo Pitti + Boboli', city: 'Флоренция', date: '14 мая', site: 'uffizi.it', urgency: 'yellow', note: '5-day pass €40' },
+  { name: 'Поезда (3 трассы)', city: '—', date: '15/18/21', site: 'trenitalia.com / italo', urgency: 'yellow', note: 'Super Economy' },
+];
+
+const PURCHASED = [
+  { name: 'Поезд Рим → Флоренция', date: '12 мая', time: '09:25→11:01' },
+  { name: 'Ватиканские Музеи', date: '11 мая', time: '13:30' },
+  { name: 'Галерея Боргезе', date: '21 мая', time: '13:00' },
+  { name: 'Пантеон', date: '24 мая', time: '09:00' },
+  { name: 'Castel Sant\'Angelo', date: '23 мая', time: '17:00' },
+];
+
+const TIPS = [
+  { icon: '☕', title: 'Кофе', text: 'Al banco (стоя): €1–1.50. За столиком — наценка. «Latte» = молоко, заказывайте «caffè latte». Капучино после 11:00 — не по-итальянски.' },
+  { icon: '🍷', title: 'Aperitivo', text: '18:00–21:00: один коктейль (€8–15) = доступ к буфету или тарелка закусок. Полноценная лёгкая еда!' },
+  { icon: '👟', title: 'Ходьба', text: 'Планируйте 10–15 км/день. Удобная обувь — абсолютный приоритет. Флоренция на 90% пешком.' },
+  { icon: '🌡️', title: 'Погода', text: 'Май: 13–25°C. Лёгкие слои, дождевик/зонт, шарф для церквей (плечи и колени должны быть закрыты).' },
+  { icon: '🛡️', title: 'Безопасность', text: 'Карманники активны в метро Рима, вапоретто Венеции, Ponte Vecchio. Поясная сумка под одежду для документов.' },
+  { icon: '🚇', title: 'Транспорт', text: 'Рим: метро A+B €1.50. Венеция: вапоретто 24ч/€25. Милан: метро €2.20. Поезда строго по расписанию — за 10–15 мин на платформе.' },
+  { icon: '⛪', title: 'Церкви', text: 'Вход бесплатный в большинство базилик. Дресс-код: плечи + колени закрыты. Шарф/кардиган всегда с собой.' },
+  { icon: '💧', title: 'Вода', text: 'Nasoni (фонтанчики) в Риме — бесплатная питьевая вода повсюду. Не покупайте бутилированную.' },
+];
+
+const ACTIONS = [
+  { date: '24 МАР 12:00', text: 'Купить билеты на Тайную вечерю — lastsupper.shop (через 3 дня!)' },
+  { date: '10 АПРЕЛЯ', text: 'Купить билеты на Колизей — ticketing.colosseo.it' },
+  { date: 'СЕЙЧАС', text: 'Забронировать Уффици и Академию на 13 мая' },
+  { date: '2–4 НЕД.', text: 'Купить поезда (Флоренция→Венеция, Венеция→Милан, Милан→Рим)' },
+  { date: '2–4 НЕД.', text: 'Забронировать Дворец Дожей и Купол Брунеллески' },
+  { date: 'ПРОВЕРИТЬ', text: 'Нужна ли плата за вход в Венецию на 15–17 мая — cda.ve.it' },
+];
+
+
+// ════════════════════════════════════════════════
+// HERO CANVAS — animated concentric circles + dots
+// ════════════════════════════════════════════════
+
+(function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, time = 0;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+  }
+
+  const cityNodes = [
+    { x: 0.35, y: 0.55, r: 60, color: 'rgba(194,112,79,0.08)', name: 'R' },
+    { x: 0.3, y: 0.35, r: 42, color: 'rgba(140,184,172,0.08)', name: 'F' },
+    { x: 0.6, y: 0.25, r: 42, color: 'rgba(97,122,148,0.08)', name: 'V' },
+    { x: 0.7, y: 0.45, r: 42, color: 'rgba(138,132,124,0.08)', name: 'M' },
+  ];
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    time += 0.003;
+
+    // Dot grid
+    ctx.fillStyle = 'rgba(200,194,182,0.15)';
+    for (let x = 0; x < w; x += 20) {
+      for (let y = 0; y < h; y += 20) {
+        ctx.beginPath();
+        ctx.arc(x, y, 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Concentric rings around each node
+    cityNodes.forEach((node, idx) => {
+      const cx = node.x * w;
+      const cy = node.y * h;
+      const baseR = node.r * (w / 1200);
+
+      for (let ring = 0; ring < 6; ring++) {
+        const r = baseR + ring * 18 + Math.sin(time + idx * 0.7 + ring * 0.3) * 3;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.strokeStyle = node.color.replace('0.08', (0.04 + (6 - ring) * 0.01).toFixed(3));
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+
+      // Fill
+      ctx.beginPath();
+      ctx.arc(cx, cy, baseR, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.fill();
+    });
+
+    // Route lines
+    const route = [0, 1, 2, 3, 0];
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = 'rgba(180,170,155,0.2)';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    for (let i = 0; i < route.length; i++) {
+      const n = cityNodes[route[i]];
+      const px = n.x * w, py = n.y * h;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+
+// ════════════════════════════════════════════════
+// ROUTE CANVAS (interactive)
+// ════════════════════════════════════════════════
+
+(function initRouteCanvas() {
+  const canvas = document.getElementById('routeCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  let hoveredCity = null;
+
+  const nodes = [
+    { key: 'roma', x: 0.3, y: 0.7, r: 40, color: '#c2704f', label: 'ROMA', sub: '6 ночей' },
+    { key: 'firenze', x: 0.25, y: 0.38, r: 30, color: '#8cb8ac', label: 'FIRENZE', sub: '3 ночи' },
+    { key: 'venezia', x: 0.6, y: 0.22, r: 30, color: '#617a94', label: 'VENEZIA', sub: '3 ночи' },
+    { key: 'milano', x: 0.75, y: 0.5, r: 30, color: '#8a847c', label: 'MILANO', sub: '3 ночи' },
+  ];
+
+  const trains = [
+    { from: 0, to: 1, label: '1ч 36м', date: '12 мая' },
+    { from: 1, to: 2, label: '~2ч', date: '15 мая' },
+    { from: 2, to: 3, label: '~2ч 15м', date: '18 мая' },
+    { from: 3, to: 0, label: '~3ч', date: '21 мая' },
+  ];
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Subtle grid
+    ctx.fillStyle = 'rgba(200,194,182,0.12)';
+    for (let x = 0; x < w; x += 18) {
+      for (let y = 0; y < h; y += 18) {
+        ctx.beginPath();
+        ctx.arc(x, y, 0.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Train route lines
+    trains.forEach(t => {
+      const a = nodes[t.from], b = nodes[t.to];
+      const ax = a.x * w, ay = a.y * h, bx = b.x * w, by = b.y * h;
+
+      ctx.setLineDash([6, 4]);
+      ctx.strokeStyle = 'rgba(180,170,155,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Train label
+      const mx = (ax + bx) / 2, my = (ay + by) / 2;
+      ctx.font = '500 10px "Inter", sans-serif';
+      ctx.fillStyle = '#8a847c';
+      ctx.textAlign = 'center';
+      ctx.fillText(t.label, mx, my - 6);
+      ctx.font = '9px "Inter", sans-serif';
+      ctx.fillStyle = '#b0a998';
+      ctx.fillText(t.date, mx, my + 6);
+    });
+
+    // City nodes
+    nodes.forEach((node, idx) => {
+      const cx = node.x * w, cy = node.y * h;
+      const isHovered = hoveredCity === idx;
+      const r = (node.r * (w / 1000)) * (isHovered ? 1.1 : 1);
+
+      // Halos
+      for (let ring = 3; ring >= 1; ring--) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, r + ring * 14, 0, Math.PI * 2);
+        ctx.strokeStyle = node.color + '15';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+
+      // Main circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = node.color + (isHovered ? '30' : '18');
+      ctx.fill();
+      ctx.strokeStyle = node.color + '60';
+      ctx.lineWidth = isHovered ? 1.5 : 0.8;
+      ctx.stroke();
+
+      // Inner circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * 0.55, 0, Math.PI * 2);
+      ctx.strokeStyle = node.color + '25';
+      ctx.lineWidth = 0.4;
+      ctx.stroke();
+
+      // Label
+      ctx.font = '600 14px "Inter", sans-serif';
+      ctx.fillStyle = '#262322';
+      ctx.textAlign = 'center';
+      ctx.fillText(node.label, cx, cy + 2);
+
+      // Sub
+      ctx.font = '10px "Inter", sans-serif';
+      ctx.fillStyle = '#8a847c';
+      ctx.fillText(node.sub, cx, cy + 16);
+    });
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let found = null;
+    nodes.forEach((node, idx) => {
+      const cx = node.x * w, cy = node.y * h;
+      const r = node.r * (w / 1000) + 20;
+      if (Math.hypot(mx - cx, my - cy) < r) found = idx;
+    });
+    if (found !== hoveredCity) {
+      hoveredCity = found;
+      canvas.style.cursor = found !== null ? 'pointer' : 'default';
+      draw();
+    }
+  });
+
+  canvas.addEventListener('click', e => {
+    if (hoveredCity !== null) {
+      const key = nodes[hoveredCity].key;
+      const card = document.querySelector(`.city-card[data-city="${key}"]`);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+})();
+
+
+// ════════════════════════════════════════════════
+// TIMELINE
+// ════════════════════════════════════════════════
+
+(function initTimeline() {
+  const bar = document.getElementById('timelineBar');
+  const container = document.getElementById('dayDetailContainer');
+  const cityColors = { roma: '#c2704f', firenze: '#8cb8ac', venezia: '#617a94', milano: '#8a847c' };
+  const cityBgs = { roma: 'var(--roma-bg)', firenze: 'var(--firenze-bg)', venezia: 'var(--venezia-bg)', milano: 'var(--milano-bg)' };
+
+  DAYS.forEach((day, idx) => {
+    const el = document.createElement('div');
+    el.className = 'tl-day' + (idx === 0 ? ' active' : '');
+    el.dataset.idx = idx;
+    el.innerHTML = `
+      <div class="tl-num">${day.date.split(' ')[0]}</div>
+      <div class="tl-dow">${day.dow}</div>
+      <div class="tl-dot" style="background:${cityColors[day.city]}"></div>
+    `;
+    el.addEventListener('click', () => selectDay(idx));
+    bar.appendChild(el);
+  });
+
+  function selectDay(idx) {
+    document.querySelectorAll('.tl-day').forEach(d => d.classList.remove('active'));
+    document.querySelector(`.tl-day[data-idx="${idx}"]`).classList.add('active');
+    renderDay(DAYS[idx]);
+  }
+
+  function renderDay(day) {
+    const color = cityColors[day.city];
+    const bg = cityBgs[day.city];
+    const cityName = CITIES[day.city].name;
+
+    let periodsHTML = day.periods.map(p => {
+      const items = p.items.map(it => {
+        let html = '<div class="period-item">';
+        if (it.time) html += `<span class="time">${it.time}</span>`;
+        html += it.highlight ? `<span class="highlight">${it.text}</span>` : it.text;
+        if (it.note) html += `<div class="note">${it.note}</div>`;
+        html += '</div>';
+        return html;
+      }).join('');
+      return `<div class="period"><div class="period-label">${p.label}</div>${items}</div>`;
+    }).join('');
+
+    let tipHTML = day.tip ? `<div class="day-tip">${day.tip}</div>` : '';
+
+    container.innerHTML = `
+      <div class="day-detail" style="border-left: 3px solid ${color};">
+        <div class="day-header">
+          <div class="day-number">${day.num}</div>
+          <div>
+            <div class="day-title">${day.date} — ${day.title}</div>
+            <span class="day-city-tag" style="background:${bg}; color:${color}; border: 1px solid ${color}30">${cityName}</span>
+          </div>
+        </div>
+        <div class="day-periods">${periodsHTML}</div>
+        ${tipHTML}
+      </div>
+    `;
+
+    requestAnimationFrame(() => {
+      container.querySelector('.day-detail').classList.add('visible');
+    });
+  }
+
+  selectDay(0);
+})();
+
+
+// ════════════════════════════════════════════════
+// CITY CARDS
+// ════════════════════════════════════════════════
+
+(function initCities() {
+  const grid = document.getElementById('cityCards');
+
+  Object.entries(CITIES).forEach(([key, city]) => {
+    const landmarks = CITY_LANDMARKS[key] || [];
+    const card = document.createElement('div');
+    card.className = 'city-card';
+    card.dataset.city = key;
+    card.innerHTML = `
+      <div class="city-name">${city.name}</div>
+      <div class="city-meta">${city.label} · ${city.dates} · ${city.nights} ночей</div>
+      <ul class="city-landmarks">
+        ${landmarks.map(l => `<li>${l}</li>`).join('')}
+      </ul>
+    `;
+    grid.appendChild(card);
+  });
+})();
+
+
+// ════════════════════════════════════════════════
+// TICKETS
+// ════════════════════════════════════════════════
+
+(function initTickets() {
+  const container = document.getElementById('ticketsContent');
+  const urgencyClass = { red: 'urgency-red', yellow: 'urgency-yellow', green: 'urgency-green' };
+  const urgencyLabel = { red: '🔴 СРОЧНО', yellow: '🟡 ЗАРАНЕЕ', green: '🟢 На месте' };
+
+  let html = `<h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:0.5rem;">К покупке</h3>`;
+  html += `<table class="tickets-table"><thead><tr>
+    <th>Что</th><th>Город</th><th>Дата</th><th>Сайт</th><th>Срочность</th><th>Примечание</th>
+  </tr></thead><tbody>`;
+
+  TICKETS.forEach(t => {
+    html += `<tr>
+      <td><strong>${t.name}</strong></td>
+      <td>${t.city}</td>
+      <td>${t.date}</td>
+      <td><a class="ticket-link" href="https://${t.site}" target="_blank">${t.site}</a></td>
+      <td><span class="${urgencyClass[t.urgency]}">${urgencyLabel[t.urgency]}</span></td>
+      <td>${t.note}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+
+  html += `<h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin:2rem 0 0.5rem;">Уже куплены ✓</h3>`;
+  html += `<table class="tickets-table"><thead><tr>
+    <th>Что</th><th>Дата</th><th>Время</th><th>Статус</th>
+  </tr></thead><tbody>`;
+  PURCHASED.forEach(p => {
+    html += `<tr>
+      <td>${p.name}</td><td>${p.date}</td><td>${p.time}</td>
+      <td><span class="ticket-purchased">✓ Куплено</span></td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+
+  container.innerHTML = html;
+})();
+
+
+// ════════════════════════════════════════════════
+// TIPS
+// ════════════════════════════════════════════════
+
+(function initTips() {
+  const grid = document.getElementById('tipsGrid');
+  TIPS.forEach(tip => {
+    const el = document.createElement('div');
+    el.className = 'tip-card';
+    el.innerHTML = `
+      <div class="tip-icon">${tip.icon}</div>
+      <div class="tip-title">${tip.title}</div>
+      <div class="tip-text">${tip.text}</div>
+    `;
+    grid.appendChild(el);
+  });
+})();
+
+
+// ════════════════════════════════════════════════
+// ACTIONS
+// ════════════════════════════════════════════════
+
+(function initActions() {
+  const container = document.getElementById('actionItems');
+  ACTIONS.forEach(a => {
+    const el = document.createElement('div');
+    el.className = 'action-item';
+    el.innerHTML = `
+      <div class="action-date">${a.date}</div>
+      <div class="action-text">${a.text}</div>
+    `;
+    container.appendChild(el);
+  });
+})();
+
+
+// ════════════════════════════════════════════════
+// SCROLL EFFECTS
+// ════════════════════════════════════════════════
+
+(function initScrollEffects() {
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+  });
+
+  // Nav hide/show
+  let lastScroll = 0;
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    if (st > 200 && st > lastScroll) nav.classList.add('nav-hidden');
+    else nav.classList.remove('nav-hidden');
+    lastScroll = st;
+
+    // Active nav link
+    const sections = ['overview', 'timeline', 'cities', 'tickets', 'tips'];
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 200) current = id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-section, .stat-card, .city-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Stat counters
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        let current = 0;
+        const step = Math.max(1, Math.floor(target / 30));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = current;
+        }, 40);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-number[data-count]').forEach(el => counterObserver.observe(el));
+})();
+</script>
+</body>
+</html>
